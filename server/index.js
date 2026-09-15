@@ -1,5 +1,4 @@
 require("dotenv").config();
-
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -10,21 +9,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ✅ Root Route (IMPORTANT for Render test)
-app.get("/", (req, res) => {
-  res.send("API is running 🚀");
-});
-
-// MongoDB Connection
+// ✅ MongoDB Connection (FIXED)
 mongoose
-  .connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/tasks", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/tasks")
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log("Mongo Error:", err));
 
-// Schema
+// ✅ Schema
 const TaskSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
@@ -39,7 +30,12 @@ const TaskSchema = new mongoose.Schema(
 
 const Task = mongoose.model("Task", TaskSchema);
 
-// ================= ROUTES =================
+// ✅ Routes
+
+// Root route (important for Render test)
+app.get("/", (req, res) => {
+  res.send("API is running 🚀");
+});
 
 // CREATE
 app.post("/tasks", async (req, res) => {
@@ -83,7 +79,7 @@ app.delete("/tasks/:id", async (req, res) => {
   }
 });
 
-// PORT (Render compatible)
+// ✅ PORT (Render compatible)
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
