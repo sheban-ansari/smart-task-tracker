@@ -9,13 +9,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ✅ MongoDB Connection (FIXED)
+// ✅ MongoDB Connection (NO options)
 mongoose
-  .connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/tasks")
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log("Mongo Error:", err));
 
-// ✅ Schema
+// Schema
 const TaskSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
@@ -30,14 +30,21 @@ const TaskSchema = new mongoose.Schema(
 
 const Task = mongoose.model("Task", TaskSchema);
 
-// ✅ Routes
+// Routes
 
-// Root route (important for Render test)
 app.get("/", (req, res) => {
   res.send("API is running 🚀");
 });
 
-// CREATE
+app.get("/tasks", async (req, res) => {
+  try {
+    const tasks = await Task.find();
+    res.json(tasks);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 app.post("/tasks", async (req, res) => {
   try {
     const task = await Task.create(req.body);
@@ -47,17 +54,6 @@ app.post("/tasks", async (req, res) => {
   }
 });
 
-// READ
-app.get("/tasks", async (req, res) => {
-  try {
-    const tasks = await Task.find().sort({ createdAt: -1 });
-    res.json(tasks);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// UPDATE
 app.put("/tasks/:id", async (req, res) => {
   try {
     const task = await Task.findByIdAndUpdate(req.params.id, req.body, {
@@ -69,7 +65,6 @@ app.put("/tasks/:id", async (req, res) => {
   }
 });
 
-// DELETE
 app.delete("/tasks/:id", async (req, res) => {
   try {
     await Task.findByIdAndDelete(req.params.id);
@@ -79,7 +74,7 @@ app.delete("/tasks/:id", async (req, res) => {
   }
 });
 
-// ✅ PORT (Render compatible)
+// PORT
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
