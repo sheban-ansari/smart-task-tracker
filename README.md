@@ -52,11 +52,12 @@ npm install
 node index.js
 ```
 
+```
 ### Frontend
 cd client
 npm install
 npm run dev
-
+```
 
 ---
 
