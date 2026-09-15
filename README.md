@@ -45,15 +45,17 @@ smart-task-tracker/
 
 ## ⚙️ Run Locally
 
-```
+
 ### Backend
+```
 cd server
 npm install
 node index.js
 ```
 
-```
+
 ### Frontend
+```
 cd client
 npm install
 npm run dev
