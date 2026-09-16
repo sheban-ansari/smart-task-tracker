@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function App() {
-  const API = "http://localhost:5000";
+  const API = "https://task-tracker-api-hmmu.onrender.com";
 
   const [tasks, setTasks] = useState([]);
   const [search, setSearch] = useState("");
