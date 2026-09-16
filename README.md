@@ -4,6 +4,16 @@ A full-stack MERN-style task management application designed to manage team work
 
 ---
 
+## 🌐 Live Demo
+
+🚀 Live App: https://task-tracker-frontend-drab.vercel.app
+
+## 🔗 Backend API
+
+⚙️ API: https://task-tracker-api-hmmu.onrender.com
+
+---
+
 ## 🔥 Features
 
 - ✅ Add tasks with title, description, priority, assignee, and due date  
