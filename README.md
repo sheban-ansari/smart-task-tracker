@@ -6,7 +6,7 @@ A full-stack MERN-style task management application designed to manage team work
 
 ## 🌐 Live Demo
 
-🚀 Live App: https://task-tracker-frontend-drab.vercel.app
+🚀 Live App: [Click Here to View Project](https://task-tracker-frontend-drab.vercel.app)
 
 ## 🔗 Backend API
 
